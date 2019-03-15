@@ -1,4 +1,4 @@
-package main
+package bar
 
 import (
 	"encoding/json"
@@ -64,7 +64,7 @@ func (b *Bar) Print() {
 
 var bar = Bar{}
 
-func run(blocks ...chan string) {
+func Run(blocks ...chan string) {
 	if !flag.Parsed() {
 		flag.Parse()
 	}
@@ -94,7 +94,7 @@ func run(blocks ...chan string) {
 	wg.Wait()
 }
 
-func schedule(cb func() string, every time.Duration) chan string {
+func Schedule(cb func() string, every time.Duration) chan string {
 	cs := make(chan string)
 	go func() {
 		cs <- cb()
