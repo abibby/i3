@@ -2,6 +2,8 @@ package modules
 
 import (
 	"fmt"
+
+	"github.com/zwzn/i3/i3gobar/icon"
 )
 
 func Pamac() string {
@@ -11,5 +13,5 @@ func Pamac() string {
 		return ""
 	}
 
-	return fmt.Sprintf("<span font='Font Awesome'></span> %s", count)
+	return fmt.Sprintf("%s %s", icon.Box, count)
 }
