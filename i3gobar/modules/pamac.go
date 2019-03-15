@@ -2,14 +2,14 @@ package modules
 
 import (
 	"fmt"
-	"os/exec"
-	"strings"
 )
 
 func Pamac() string {
-	b, _ := exec.Command("pamac", "checkupdates", "-q").Output()
+	count := Shell("pamac checkupdates -q | wc -l")()
 
-	count := strings.Count(string(b), "\n")
+	if count == "0" {
+		return ""
+	}
 
-	return fmt.Sprintf("pkg %d", count)
+	return fmt.Sprintf("<span font='Font Awesome'></span> %s", count)
 }
