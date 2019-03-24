@@ -16,18 +16,12 @@ type Click struct {
 }
 
 type Block struct {
-	clicks chan Click
-	text   chan string
+	onClick func(button Click)
+	text    chan string
 }
 
 func (b *Block) OnClick(cb func(button Click)) *Block {
-	b.clicks = make(chan Click)
-	go func() {
-		for click := range b.clicks {
-			// modules.NotifySend("%#v", b)
-			cb(click)
-		}
-	}()
+	b.onClick = cb
 	return b
 }
 

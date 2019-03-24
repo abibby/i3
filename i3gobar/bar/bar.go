@@ -102,8 +102,8 @@ func readClicks(wg *sync.WaitGroup, blocks []*Block) {
 			continue
 		}
 		for _, block := range blocks {
-			if block.clicks != nil {
-				go func() { block.clicks <- *click }()
+			if block.onClick != nil {
+				block.onClick(*click)
 			}
 		}
 	}

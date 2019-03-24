@@ -20,7 +20,7 @@ func main() {
 		bar.Schedule(modules.Weather, time.Hour),
 		bar.Schedule(modules.ZFS, time.Hour),
 		bar.Schedule(modules.Pamac, time.Hour).OnClick(func(click bar.Click) {
-			modules.NotifySend("%#v", click)
+			modules.NotifySend(modules.Shell("pamac checkupdates")())
 		}),
 		bar.Schedule(modules.Shell("$HOME/bin/i3blocks-contrib/battery2/battery2"), time.Second*10),
 		bar.Schedule(modules.DateTime, time.Second),
