@@ -1,21 +1,18 @@
 package bar
 
 import (
+	"bufio"
 	"encoding/json"
 	"flag"
 	"fmt"
+	"os"
 	"sort"
 	"strings"
 	"sync"
-	"time"
 
 	"github.com/microcosm-cc/bluemonday"
 )
 
-type Block struct {
-	name    string
-	channel chan string
-}
 type barSection struct {
 	id     int
 	Text   string `json:"full_text"`
@@ -64,11 +61,16 @@ func (b *Bar) Print() {
 
 var bar = Bar{}
 
-func Run(blocks ...chan string) {
+func Run(blocks ...*Block) {
 	if !flag.Parsed() {
 		flag.Parse()
 	}
-	wg := sync.WaitGroup{}
+
+	wg := &sync.WaitGroup{}
+
+	wg.Add(1)
+	go readClicks(wg, blocks)
+
 	for id := range blocks {
 		bar = append(bar, &barSection{
 			id:     id,
@@ -76,31 +78,43 @@ func Run(blocks ...chan string) {
 			Markup: "pango",
 		})
 		wg.Add(1)
-
 	}
+
 	fmt.Printf("{\"version\":1,\"click_events\":true}\n[[]\n")
 	bar.Print()
 	for id, cs := range blocks {
-		go func(id int, cs chan string) {
-			for text := range cs {
-				parts := strings.Split(strings.TrimRight(text, "\n"), "\n")
-
-				bar.Update(id, parts[len(parts)-1])
-				bar.Print()
-			}
-			wg.Done()
-		}(id, cs)
+		go runBlock(wg, id, cs)
 	}
 	wg.Wait()
 }
 
-func Schedule(cb func() string, every time.Duration) chan string {
-	cs := make(chan string)
-	go func() {
-		cs <- cb()
-		for range time.Tick(every) {
-			cs <- cb()
+func readClicks(wg *sync.WaitGroup, blocks []*Block) {
+	defer wg.Done()
+	scanner := bufio.NewScanner(os.Stdin)
+	for scanner.Scan() {
+		line := strings.Trim(scanner.Text(), ",")
+		if line == "[" {
+			continue
 		}
-	}()
-	return cs
+		click := &Click{}
+		err := json.Unmarshal([]byte(line), click)
+		if err != nil {
+			continue
+		}
+		for _, block := range blocks {
+			if block.clicks != nil {
+				go func() { block.clicks <- *click }()
+			}
+		}
+	}
+}
+
+func runBlock(wg *sync.WaitGroup, id int, cs *Block) {
+	defer wg.Done()
+	for text := range cs.text {
+		parts := strings.Split(strings.TrimRight(text, "\n"), "\n")
+
+		bar.Update(id, parts[len(parts)-1])
+		bar.Print()
+	}
 }
