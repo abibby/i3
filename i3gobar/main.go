@@ -15,7 +15,8 @@ func main() {
 		bar.Schedule(modules.Pamac, time.Hour).OnClick(func(click bar.Click) {
 			modules.Notify(modules.Shell("pamac checkupdates")()).AppName("pamac").Send()
 		}),
-		bar.Schedule(modules.Shell("$HOME/bin/i3blocks-contrib/battery2/battery2"), time.Second*10),
+		bar.Schedule(modules.Shell("task list"), time.Second*10),
+		bar.Schedule(modules.Shell("$HOME/bin/battery"), time.Second*10),
 		bar.Schedule(modules.Prepend("MST ", modules.TimeIn("America/Phoenix")), time.Second),
 		bar.Schedule(modules.DateTime, time.Second),
 	)
