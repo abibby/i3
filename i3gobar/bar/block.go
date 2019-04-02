@@ -20,6 +20,12 @@ type Block struct {
 	text    chan string
 }
 
+func NewBlock(cs chan string) *Block {
+	return &Block{
+		text: cs,
+	}
+}
+
 func (b *Block) OnClick(cb func(button Click)) *Block {
 	b.onClick = cb
 	return b

@@ -13,6 +13,7 @@ func main() {
 	//
 	bar.Run(
 		bar.Ticker(40, bar.Schedule(modules.Shell("playerctl metadata --format '{{ artist }} - {{ album }} - {{ title }}'"), time.Second*10)),
+		// modules.Music(),
 		bar.Schedule(modules.Weather, time.Hour),
 		bar.Schedule(modules.ZFS, time.Hour),
 		bar.Schedule(modules.Pamac, time.Hour).OnClick(func(click bar.Click) {
