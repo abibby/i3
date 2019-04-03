@@ -2,7 +2,6 @@ package modules
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/zwzn/gpmdp"
 	"github.com/zwzn/i3/i3gobar/bar"
@@ -15,22 +14,29 @@ func Music() *bar.Block {
 	go func() {
 		g, err := gpmdp.Connect()
 		if err != nil {
-			log.Fatal(err)
+			cs <- err.Error()
 		}
-		playing := false
-		track := &gpmdp.Track{}
+		ico := icon.PauseCircle
+		title := ""
 		for {
 			select {
-			case track = <-g.Track():
-			case playing = <-g.Playing():
-			}
+			case err := <-g.Error:
+				cs <- err.Error()
 
-			ico := icon.PauseCircle
-			if playing {
-				ico = icon.PlayCircle
-			}
+			case ev := <-g.Event:
+				if track, ok := ev.Track(); ok {
+					title = fmt.Sprintf("%s - %s\n", track.Title, track.Artist)
+				}
+				if playing, ok := ev.Playing(); ok {
+					if playing {
+						ico = icon.PlayCircle
+					} else {
+						ico = icon.PauseCircle
+					}
+				}
 
-			cs <- fmt.Sprintf("%s %s - %s\n", ico, track.Title, track.Artist)
+				cs <- fmt.Sprintf("%s %s\n", ico, title)
+			}
 		}
 
 	}()
