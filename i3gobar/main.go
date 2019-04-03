@@ -12,7 +12,7 @@ import (
 func main() {
 	//
 	bar.Run(
-		// bar.Ticker(40, bar.Schedule(modules.Shell("playerctl metadata --format '{{ artist }} - {{ album }} - {{ title }}'"), time.Second*10)),
+		// bar.Ticker(40, bar.Schedule(modules.Shell("playerctl metadata --format '{{ artist }} - {{ title }}'"), time.Second*10)),
 		// bar.Ticker(40, modules.Music()),
 		modules.Music(),
 		bar.Schedule(modules.Weather, time.Hour),
