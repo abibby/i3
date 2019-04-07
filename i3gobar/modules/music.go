@@ -15,6 +15,7 @@ func Music() *bar.Block {
 		g, err := gpmdp.Connect()
 		if err != nil {
 			cs <- err.Error()
+			return
 		}
 		ico := icon.PauseCircle
 		title := ""
@@ -22,23 +23,33 @@ func Music() *bar.Block {
 			select {
 			case err := <-g.Error:
 				cs <- err.Error()
-
+				g.Close()
+				return
 			case ev := <-g.Event:
 				if track, ok := ev.Track(); ok {
 					title = fmt.Sprintf("%s - %s\n", track.Title, track.Artist)
 				}
 				if playing, ok := ev.Playing(); ok {
 					if playing {
-						ico = icon.PlayCircle
+						ico = icon.Pause
 					} else {
-						ico = icon.PauseCircle
+						ico = icon.Play
 					}
 				}
 
-				cs <- fmt.Sprintf("%s %s\n", ico, title)
+				cs <- fmt.Sprintf("%s %s %s %s\n", icon.StepBackward, ico, icon.StepForward, title)
 			}
 		}
 
 	}()
-	return bar.NewBlock(cs)
+	return bar.NewBlock(cs).OnClick(func(click bar.Click) {
+		if click.RelativeX < 16 {
+			Shell("playerctl previous")()
+		} else if click.RelativeX < 42 {
+			Shell("playerctl play-pause")()
+		} else if click.RelativeX < 62 {
+			Shell("playerctl next")()
+		}
+		// Notify(spew.Sdump(click)).Replace(10341).Send()
+	})
 }

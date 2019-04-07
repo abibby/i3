@@ -5,6 +5,8 @@ import (
 )
 
 type Click struct {
+	Name      string   `json:"name"`
+	Instance  string   `json:"instance"`
 	Button    int      `json:"button"`
 	Modifiers []string `json:"modifiers"`
 	X         int      `json:"x"`
@@ -26,7 +28,7 @@ func NewBlock(cs chan string) *Block {
 	}
 }
 
-func (b *Block) OnClick(cb func(button Click)) *Block {
+func (b *Block) OnClick(cb func(Click)) *Block {
 	b.onClick = cb
 	return b
 }

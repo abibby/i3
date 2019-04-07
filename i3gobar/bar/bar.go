@@ -14,9 +14,11 @@ import (
 )
 
 type barSection struct {
-	id     int
-	Text   string `json:"full_text"`
-	Markup string `json:"markup,omitempty"`
+	id       int
+	Name     string `json:"Name"`
+	Instance string `json:"Instance"`
+	Text     string `json:"full_text"`
+	Markup   string `json:"markup,omitempty"`
 }
 
 type Bar []*barSection
@@ -73,9 +75,10 @@ func Run(blocks ...*Block) {
 
 	for id := range blocks {
 		bar = append(bar, &barSection{
-			id:     id,
-			Text:   "",
-			Markup: "pango",
+			id:       id,
+			Instance: fmt.Sprintf("%d", id),
+			Text:     "",
+			Markup:   "pango",
 		})
 		wg.Add(1)
 	}
@@ -101,9 +104,11 @@ func readClicks(wg *sync.WaitGroup, blocks []*Block) {
 		if err != nil {
 			continue
 		}
-		for _, block := range blocks {
+		for id, block := range blocks {
 			if block.onClick != nil {
-				block.onClick(*click)
+				if fmt.Sprint(id) == click.Instance {
+					go block.onClick(*click)
+				}
 			}
 		}
 	}
