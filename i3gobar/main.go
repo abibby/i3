@@ -19,6 +19,8 @@ func main() {
 		}),
 		bar.Schedule(modules.Shell("$HOME/bin/battery"), time.Second*10),
 		bar.Schedule(modules.Prepend("MST ", modules.TimeIn("America/Phoenix")), time.Second),
-		bar.Schedule(modules.DateTime, time.Second),
+		bar.Schedule(modules.DateTime, time.Second).OnClick(func(click bar.Click) {
+			modules.Shell(`popup.sh open "quake cal" "xst -n quake_term -e calread"`)()
+		}),
 	)
 }
