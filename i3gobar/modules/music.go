@@ -2,6 +2,7 @@ package modules
 
 import (
 	"fmt"
+	"html"
 
 	"github.com/zwzn/gpmdp"
 	"github.com/zwzn/i3/i3gobar/bar"
@@ -27,7 +28,8 @@ func Music() *bar.Block {
 				return
 			case ev := <-g.Event:
 				if track, ok := ev.Track(); ok {
-					title = fmt.Sprintf("%s - %s\n", track.Title, track.Artist)
+					title = html.EscapeString(fmt.Sprintf("%s - %s\n", track.Title, track.Artist))
+
 				}
 				if playing, ok := ev.Playing(); ok {
 					if playing {
