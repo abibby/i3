@@ -18,7 +18,7 @@ func Music() *bar.Block {
 			cs <- err.Error()
 			return
 		}
-		ico := icon.PauseCircle
+		ico := ""
 		title := ""
 		for {
 			select {
@@ -28,7 +28,11 @@ func Music() *bar.Block {
 				return
 			case ev := <-g.Event:
 				if track, ok := ev.Track(); ok {
-					title = html.EscapeString(fmt.Sprintf("%s - %s\n", track.Title, track.Artist))
+					title = html.EscapeString(fmt.Sprintf(
+						"%s - %s\n",
+						truncate(track.Title, 25),
+						truncate(track.Artist, 20),
+					))
 
 				}
 				if playing, ok := ev.Playing(); ok {
@@ -44,6 +48,7 @@ func Music() *bar.Block {
 		}
 
 	}()
+
 	return bar.NewBlock(cs).OnClick(func(click bar.Click) {
 		if click.RelativeX < 16 {
 			Shell("playerctl previous")()

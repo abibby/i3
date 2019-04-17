@@ -8,12 +8,14 @@ import (
 )
 
 func main() {
+
 	bar.Run(
-		modules.Music(),
 		bar.Schedule(modules.Weather, time.Hour).OnClick(func(click bar.Click) {
 			modules.Shell("brave 'https://weather.gc.ca/city/pages/on-5_metric_e.html'")()
 		}),
+		modules.Music(),
 		bar.Schedule(modules.ZFS, time.Hour),
+		bar.Schedule(modules.Mail, time.Minute),
 		bar.Schedule(modules.Pamac, time.Hour).OnClick(func(click bar.Click) {
 			modules.Notify(modules.Shell("pamac checkupdates")()).AppName("pamac").Send()
 		}),
