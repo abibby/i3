@@ -12,7 +12,7 @@ func main() {
 
 	bar.Run(
 		bar.Schedule(modules.Weather, time.Hour).OnClick(func(click bar.Click) {
-			if click.Button != 1 {
+			if click.Button != bar.MouseLeft {
 				return
 			}
 			modules.Shell("xdg-open 'https://weather.gc.ca/city/pages/on-5_metric_e.html'")()
