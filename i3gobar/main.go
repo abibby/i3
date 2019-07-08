@@ -15,7 +15,7 @@ func main() {
 			if click.Button != 1 {
 				return
 			}
-			modules.Shell("brave 'https://weather.gc.ca/city/pages/on-5_metric_e.html'")()
+			modules.Shell("xdg-open 'https://weather.gc.ca/city/pages/on-5_metric_e.html'")()
 		}),
 		modules.Music(),
 		bar.Schedule(modules.ZFS, time.Hour),
