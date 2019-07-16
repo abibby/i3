@@ -3,6 +3,7 @@ package modules
 import (
 	"fmt"
 	"html"
+	"log"
 
 	"github.com/zwzn/gpmdp"
 	"github.com/zwzn/i3/i3gobar/bar"
@@ -15,7 +16,8 @@ func Music() *bar.Block {
 	go func() {
 		g, err := gpmdp.Connect()
 		if err != nil {
-			cs <- err.Error()
+			log.Println(err)
+			cs <- ""
 			return
 		}
 		ico := ""
@@ -23,7 +25,8 @@ func Music() *bar.Block {
 		for {
 			select {
 			case err := <-g.Error:
-				cs <- err.Error()
+				log.Println(err)
+				cs <- ""
 				g.Close()
 				return
 			case ev := <-g.Event:
