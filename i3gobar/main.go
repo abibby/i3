@@ -11,7 +11,7 @@ import (
 func main() {
 
 	bar.Run(
-		modules.Timer(),
+		// modules.Timer(),
 		bar.Schedule(modules.Weather, time.Hour).OnClick(func(click bar.Click) {
 			if click.Button != bar.MouseLeft {
 				return
