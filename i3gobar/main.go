@@ -16,7 +16,7 @@ func main() {
 			if click.Button != bar.MouseLeft {
 				return
 			}
-			modules.Shell("xdg-open 'https://weather.gc.ca/city/pages/on-5_metric_e.html'")()
+			modules.Shell("xdg-open 'https://weather.gc.ca/forecast/hourly/on-5_metric_e.html'")()
 		}),
 		modules.Music(),
 		bar.Schedule(modules.ZFS, time.Hour),
