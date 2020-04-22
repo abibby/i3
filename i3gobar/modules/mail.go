@@ -5,7 +5,7 @@ import (
 	"os/exec"
 
 	_ "github.com/mattn/go-sqlite3"
-	"github.com/zwzn/i3/i3gobar/icon"
+	"github.com/abibby/i3/i3gobar/icon"
 )
 
 var lastList = ""

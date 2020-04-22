@@ -5,9 +5,9 @@ import (
 	"html"
 	"log"
 
-	"github.com/zwzn/gpmdp"
-	"github.com/zwzn/i3/i3gobar/bar"
-	"github.com/zwzn/i3/i3gobar/icon"
+	"github.com/abibby/gpmdp"
+	"github.com/abibby/i3/i3gobar/bar"
+	"github.com/abibby/i3/i3gobar/icon"
 )
 
 func Music() *bar.Block {

@@ -7,7 +7,7 @@ import (
 	"sort"
 
 	"github.com/davecgh/go-spew/spew"
-	"github.com/zwzn/i3"
+	"github.com/abibby/i3"
 )
 
 var spaces []i3.Workspace

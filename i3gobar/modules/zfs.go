@@ -3,7 +3,7 @@ package modules
 import (
 	"fmt"
 
-	"github.com/zwzn/i3/i3gobar/icon"
+	"github.com/abibby/i3/i3gobar/icon"
 )
 
 func ZFS() string {

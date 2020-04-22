@@ -3,7 +3,7 @@ package modules
 import (
 	"time"
 
-	"github.com/zwzn/i3/i3gobar/bar"
+	"github.com/abibby/i3/i3gobar/bar"
 )
 
 func Timer() *bar.Block {

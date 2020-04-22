@@ -3,7 +3,7 @@ package modules
 import (
 	"fmt"
 
-	"github.com/zwzn/weather"
+	"github.com/abibby/weather"
 )
 
 func Weather() string {
