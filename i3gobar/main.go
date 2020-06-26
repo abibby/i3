@@ -9,7 +9,6 @@ import (
 )
 
 func main() {
-
 	bar.Run(
 		// modules.Timer(),
 		bar.Schedule(modules.Weather, time.Hour).OnClick(func(click bar.Click) {
@@ -19,6 +18,13 @@ func main() {
 			modules.Shell("xdg-open 'https://weather.gc.ca/forecast/hourly/on-5_metric_e.html'")()
 		}),
 		modules.Music(),
+		bar.Schedule(modules.GitHubNotifications, time.Minute*1).OnClick(func(click bar.Click) {
+			if click.Button != bar.MouseLeft {
+				return
+			}
+
+			modules.Shell("xdg-open 'https://github.com/notifications?query=is%3Aunread'")()
+		}),
 		bar.Schedule(modules.ZFS, time.Hour),
 		bar.Schedule(modules.Mail, time.Minute),
 		bar.Schedule(modules.Pamac, time.Hour).OnClick(func(click bar.Click) {

@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os/exec"
 
-	_ "github.com/mattn/go-sqlite3"
 	"github.com/abibby/i3/i3gobar/icon"
+	_ "github.com/mattn/go-sqlite3"
 )
 
 var lastList = ""
