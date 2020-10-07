@@ -16,4 +16,5 @@ require (
 	golang.org/x/text v0.3.3 // indirect
 	google.golang.org/appengine v1.6.6 // indirect
 	google.golang.org/protobuf v1.25.0 // indirect
+	robpike.io/filter v0.0.0-20150108201509-2984852a2183
 )

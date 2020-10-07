@@ -9,6 +9,7 @@ import (
 )
 
 func main() {
+	modules.GitHubNotifications()
 	bar.Run(
 		// modules.Timer(),
 		bar.Schedule(modules.Weather, time.Hour).OnClick(func(click bar.Click) {
