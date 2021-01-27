@@ -1,0 +1,8 @@
+# curl 'https://merotechnologies.atlassian.net/gateway/api/notification-log/api/2/notifications?cloudId=ee838988-cd60-4563-a11d-5a96a378969a&direct=true&includeContent=true&limit=8' \
+#     -H 'Cookie: cloud.session.token=eyJraWQiOiJzZXNzaW9uLXNlcnZpY2VcL3Byb2QtMTU5Mjg1ODM5NCIsImFsZyI6IlJTMjU2In0.eyJhc3NvY2lhdGlvbnMiOltdLCJzdWIiOiI1ZWM2YzU3OGIxOTlhYTBjMTNmOTk4NGEiLCJlbWFpbERvbWFpbiI6Im1lcm8uY28iLCJpbXBlcnNvbmF0aW9uIjpbXSwiY3JlYXRlZCI6MTYwNTEwMjU4MiwicmVmcmVzaFRpbWVvdXQiOjE2MDUxODE3NzMsInZlcmlmaWVkIjp0cnVlLCJpc3MiOiJzZXNzaW9uLXNlcnZpY2UiLCJzZXNzaW9uSWQiOiI5MTVjNmRmMy0xODVhLTRhNjMtODA1NC0zNDM5ZmFkYjk5NzgiLCJhdWQiOiJhdGxhc3NpYW4iLCJuYmYiOjE2MDUxODExNzMsImV4cCI6MTYwNzc3MzE3MywiaWF0IjoxNjA1MTgxMTczLCJlbWFpbCI6ImFiaWJieUBtZXJvLmNvIiwianRpIjoiOTE1YzZkZjMtMTg1YS00YTYzLTgwNTQtMzQzOWZhZGI5OTc4In0.Ps-NN7EgV6gJLKGOqZyITfNN7Tji-ze3i4mDZEz5v5eQoKsrIdSFaSFyx8TmlJKvOIcpAuSid1mrFS3Qx7aDsX_-pzj8Jc8p_anry9llcV77e3vdWyHFzdBp1k0qoBUnKuthESpxo69boeVrk34cCPyqCuq20fqIF3JoIV3WtIUMi96wpkUgYH8xEkliTMHGjgP2-iKrydZgV6XCScdWCjgzsqIiLlj2-tpB7vgP9XqW17qFQWFR7ofhB7E9XWm2ff__6Dddzl5HnRJ2FXItq4nqm3I3e35PYi6G5JS3xFDAEr3zkt4zDVkPxEKSlqAVyA5Io5TcBiIA1v0V8gNbKQ; ajs_group_id=null; ajs_anonymous_id=%220544187f-74c3-4d81-a4fc-1e5adfffcc7a%22; atlassian.xsrf.token=51e80574-d28e-4d7f-b086-aeae6f029dda_e786d2de6e3bb102b8bb047293718ad329262c55_lin'
+
+curl 'https://auth.atlassian.com/co/authenticate' -v \
+    -H 'Content-Type: application/json' \
+    -H 'Origin: https://id.atlassian.com' \
+    -H 'Cache-Control: no-cache' \
+    --data-raw '{"client_id":"tDP5by46cc3gEck7d2vbHZsqsfrDK6t9","username":"abibby@mero.co","password":"x8h5ct6SKWvifa8nN85vgGCnP","realm":"eyJhcHBsaWNhdGlvbktleSI6ImppcmEifQ==","credential_type":"http://auth0.com/oauth/grant-type/password-realm"}'

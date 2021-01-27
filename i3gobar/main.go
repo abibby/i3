@@ -9,7 +9,9 @@ import (
 )
 
 func main() {
-	modules.GitHubNotifications()
+	// spew.Dump(modules.GitHubNotifications())
+	// modules.JiraNotifications()
+	// os.Exit(3)
 	bar.Run(
 		// modules.Timer(),
 		bar.Schedule(modules.Weather, time.Hour).OnClick(func(click bar.Click) {
@@ -24,8 +26,9 @@ func main() {
 				return
 			}
 
-			modules.Shell("xdg-open 'https://github.com/notifications?query=is%3Aunread'")()
+			modules.Shell("xdg-open 'https://github.com/notifications'")()
 		}),
+		// bar.Schedule(modules.JiraNotifications, time.Minute*1),
 		bar.Schedule(modules.ZFS, time.Hour),
 		bar.Schedule(modules.Mail, time.Minute),
 		bar.Schedule(modules.Pamac, time.Hour).OnClick(func(click bar.Click) {

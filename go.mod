@@ -5,6 +5,7 @@ go 1.14
 require (
 	github.com/abibby/gpmdp v0.0.0-20200422185804-9e28695a8469
 	github.com/abibby/weather v0.0.0-20200708174034-7b62edd6d1ef
+	github.com/andygrunwald/go-jira v1.12.0
 	github.com/davecgh/go-spew v1.1.1
 	github.com/golang/protobuf v1.4.2 // indirect
 	github.com/google/go-github/v32 v32.0.0
