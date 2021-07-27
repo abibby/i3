@@ -13,14 +13,15 @@ func Weather() string {
 		return ""
 	}
 
-	temp := w.CurrentConditions.Temperature
-	if (w.CurrentConditions.Humidex != weather.Unit{}) {
-		temp = w.CurrentConditions.Humidex
+	forcast := w.ForecastGroup.Forcast[0]
+	temp := forcast.Temperature
+	if (forcast.Humidex != weather.Unit{}) {
+		temp = forcast.Humidex
 	}
 
-	if (w.CurrentConditions.WindChill != weather.Unit{}) {
-		temp = w.CurrentConditions.WindChill
-	}
+	// if (forcast.WindChill != weather.Unit{}) {
+	// 	temp = forcast.WindChill
+	// }
 
 	return fmt.Sprintf("%s, %s",
 		w.ForecastGroup.Forcast[0].AbbreviatedForecast.Summary,
