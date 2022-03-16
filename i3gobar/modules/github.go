@@ -36,18 +36,18 @@ func GitHubNotifications() string {
 
 	notifs, _, err := client.Activity.ListNotifications(ctx, nil)
 	if err != nil {
-		log.Printf("%v\n", err)
+		log.Printf("Failed to fetch notifications: %v\n", err)
 		return ""
 	}
 	failedActions, err := failedWorkflows(ctx, client)
 	if err != nil {
-		log.Printf("%v\n", err)
+		log.Printf("Failed to fetch workflows: %v\n", err)
 		return ""
 	}
 
 	notMergable, err := getNotMergableCount(ctx, client)
 	if err != nil {
-		log.Printf("%v\n", err)
+		log.Printf("Failed to fetch non mergable PRs: %v\n", err)
 		return ""
 	}
 

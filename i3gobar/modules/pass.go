@@ -6,7 +6,7 @@ import (
 )
 
 func pass(key string) (string, error) {
-	result := Shell("pass " + key)()
+	result := Shell("pass " + key + " | head -n 1")()
 	if strings.HasPrefix("Error: ", result) {
 		return "", fmt.Errorf(result)
 	}
