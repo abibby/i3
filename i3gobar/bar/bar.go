@@ -13,7 +13,7 @@ import (
 	"github.com/microcosm-cc/bluemonday"
 )
 
-type barSection struct {
+type BarSection struct {
 	id       int
 	Name     string `json:"Name"`
 	Instance string `json:"Instance"`
@@ -21,7 +21,7 @@ type barSection struct {
 	Markup   string `json:"markup,omitempty"`
 }
 
-type Bar []*barSection
+type Bar []*BarSection
 
 var (
 	consoleMode bool
@@ -74,7 +74,7 @@ func Run(blocks ...*Block) {
 	go readClicks(wg, blocks)
 
 	for id := range blocks {
-		bar = append(bar, &barSection{
+		bar = append(bar, &BarSection{
 			id:       id,
 			Instance: fmt.Sprintf("%d", id),
 			Text:     "",

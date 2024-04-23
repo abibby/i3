@@ -1,7 +1,6 @@
 package main
 
 import (
-	"os/exec"
 	"time"
 
 	"github.com/abibby/i3/i3gobar/bar"
@@ -20,7 +19,7 @@ func main() {
 			}
 			modules.Shell("xdg-open 'https://weather.gc.ca/forecast/hourly/on-5_metric_e.html'")()
 		}),
-		modules.Music(),
+		// modules.Music(),
 		bar.Schedule(modules.GitHubNotifications, time.Minute*1).OnClick(func(click bar.Click) {
 			if click.Button != bar.MouseLeft {
 				return
@@ -30,12 +29,12 @@ func main() {
 		}),
 		// bar.Schedule(modules.JiraNotifications, time.Minute*1),
 		bar.Schedule(modules.ZFS, time.Hour),
-		bar.Schedule(modules.Mail, time.Minute),
-		bar.Schedule(modules.Pamac, time.Hour).OnClick(func(click bar.Click) {
-			b, _ := exec.Command("pamac", "checkupdates").Output()
-			modules.Notify(string(b)).AppName("pamac").Send()
-		}),
-		bar.Schedule(modules.Shell("$HOME/bin/battery"), time.Second*10),
+		// bar.Schedule(modules.Mail, time.Minute),
+		// bar.Schedule(modules.Pamac, time.Hour).OnClick(func(click bar.Click) {
+		// 	b, _ := exec.Command("pamac", "checkupdates").Output()
+		// 	modules.Notify(string(b)).AppName("pamac").Send()
+		// }),
+		// bar.Schedule(modules.Shell("$HOME/bin/battery"), time.Second*10),
 		bar.Schedule(modules.DateTime, time.Second),
 	)
 }
