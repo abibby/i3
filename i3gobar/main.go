@@ -13,12 +13,12 @@ func main() {
 	// os.Exit(3)
 	bar.Run(
 		// modules.Timer(),
-		bar.Schedule(modules.Weather, time.Hour).OnClick(func(click bar.Click) {
-			if click.Button != bar.MouseLeft {
-				return
-			}
-			modules.Shell("xdg-open 'https://weather.gc.ca/forecast/hourly/on-5_metric_e.html'")()
-		}),
+		// bar.Schedule(modules.Weather, time.Hour).OnClick(func(click bar.Click) {
+		// 	if click.Button != bar.MouseLeft {
+		// 		return
+		// 	}
+		// 	modules.Shell("xdg-open 'https://weather.gc.ca/forecast/hourly/on-5_metric_e.html'")()
+		// }),
 		// modules.Music(),
 		bar.Schedule(modules.GitHubNotifications, time.Minute*1).OnClick(func(click bar.Click) {
 			if click.Button != bar.MouseLeft {
